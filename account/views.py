@@ -6,7 +6,10 @@ from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
 # from .models import Profile
 from django.contrib.auth.decorators import login_required
+# from django import template
+# from ..blog.models import Post
 
+# register = template.Library()
 
 def user_login(request):
     if request.method == 'POST':
@@ -36,3 +39,7 @@ def dashboard(request):
     return render(request,
                   'account/dashboard.html',
                   {'section': 'dashboard'})
+
+# @register.simple_tag
+# def total_posts():
+#     return Post.published.count()

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 class PublishedManager(models.Manager):
@@ -13,8 +14,8 @@ class PublishedManager(models.Manager):
 class Post(models.Model):
 
     class Status(models.TextChoices):
-        DRAFT = 'QQ', 'Draft'
-        PUBLISHED = ':)', 'Published'
+        DRAFT = 'DF', 'Draft'
+        PUBLISHED = 'PB', 'Published'
 
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250,
@@ -32,6 +33,7 @@ class Post(models.Model):
 
     objects = models.Manager() # The default manager.
     published = PublishedManager() # Our custom manager.
+    tags = TaggableManager()
 
     class Meta:
         ordering = ['-publish']
