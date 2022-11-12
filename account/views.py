@@ -43,6 +43,14 @@ def dashboard(request):
                   {'section': 'dashboard',
                     'user_point':user_point})
 
+@login_required
+def add_value(request):
+    bank_value = request.user.point
+    bank_account = "4005216588"
+    return render(request,
+                  'account/add_value.html',
+                  {'bank_account':bank_account,'bank_value':bank_value})
+
 # @register.simple_tag
 # def total_posts():
 #     return Post.published.count()
