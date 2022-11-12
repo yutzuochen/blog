@@ -36,9 +36,12 @@ def user_login(request):
 
 @login_required
 def dashboard(request):
+    user_point = request.user.point
+    print("user_point in dashboard: ", user_point)
     return render(request,
                   'account/dashboard.html',
-                  {'section': 'dashboard'})
+                  {'section': 'dashboard',
+                    'user_point':user_point})
 
 # @register.simple_tag
 # def total_posts():

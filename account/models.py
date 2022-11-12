@@ -13,7 +13,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     status = models.CharField(max_length=100, choices=STATUS, default='regular')
     description = models.TextField("Description", max_length=600, default='', blank=True)
-    money = models.FloatField(default=50)
+    point = models.FloatField(default=50)
 
     def __str__(self):
         return self.username
