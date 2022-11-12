@@ -14,7 +14,7 @@ def post_list(request):
     userid = request.user.id
     print("userid in post_list: ", userid)
     # Pagination with 3 posts per page
-    paginator = Paginator(post_list, 3)
+    paginator = Paginator(post_list, 10)
     page_number = request.GET.get('page', 1)
     try:
         posts = paginator.page(page_number)

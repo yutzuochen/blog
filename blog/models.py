@@ -30,11 +30,13 @@ class Post(models.Model):
     status = models.CharField(max_length=2,
                               choices=Status.choices,
                               default=Status.DRAFT)
+    pay_to_read = models.FloatField(default=0)
+
 
     objects = models.Manager() # The default manager.
     published = PublishedManager() # Our custom manager.
     tags = TaggableManager()
-
+    
     class Meta:
         ordering = ['-publish']
         indexes = [

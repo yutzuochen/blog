@@ -1,19 +1,35 @@
-{% extends "blog/base.html" %}
+{% extends "base.html" %}
 
-{% block title %}My Blog{% endblock %}
+{% block title %}Blog{% endblock %}
 
 {% block content %}
   <h1>Global Blog list</h1>
   {% for post in posts %}
-    <h2>
-      <a href="{{ post.get_absolute_url }}">
-        {{ post.title }}
-      </a>
-    </h2>
-    <p class="date">
-      Published {{ post.publish }} by {{ post.author }}
-    </p>
-    {{ post.body|truncatewords:30|linebreaks }}
+    <!--
+    <p>post.pay_to_read: {{post.pay_to_read}}</p>
+    <p>post.author.id: {{post.author.id}}</p>
+    <p>request.user.id: {{request.user.id}}</p>
+    -->
+    {% if post.pay_to_read <= 0 or post.author.id == request.user.id %}
+
+      <h2>
+        <a href="{{ post.get_absolute_url }}">
+          {{ post.title }}
+        </a>
+      </h2>
+      <p class="date">
+        Published {{ post.publish }} by {{ post.author }}
+      </p>
+      {{ post.body|truncatewords:30|linebreaks }}
+    
+    {% else %}
+      <h2>{{ post.title }}</h2>
+      <p>(pay to unlock)</p>
+      <p class="date">
+        Published {{ post.publish }} by {{ post.author }}
+      </p>
+    
+    {% endif %}
   {% endfor %}
   
 {% endblock %}
