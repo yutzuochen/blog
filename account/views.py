@@ -36,9 +36,20 @@ def user_login(request):
 
 @login_required
 def dashboard(request):
+    user_point = request.user.point
+    print("user_point in dashboard: ", user_point)
     return render(request,
                   'account/dashboard.html',
-                  {'section': 'dashboard'})
+                  {'section': 'dashboard',
+                    'user_point':user_point})
+
+@login_required
+def add_value(request):
+    bank_value = request.user.point
+    bank_account = "4005216588"
+    return render(request,
+                  'account/add_value.html',
+                  {'bank_account':bank_account,'bank_value':bank_value})
 
 # @register.simple_tag
 # def total_posts():

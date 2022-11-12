@@ -6,7 +6,8 @@ from django.views.generic import ListView
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from .models import CustomUser
 
 
 def post_list(request):
