@@ -84,6 +84,13 @@ ol {
     padding:30px 100px;
 }
 
+p.date { 
+    color:#ccc;
+    font-family: georgia, serif;
+    font-size: 12px;
+    font-style: italic; 
+}
+
 /* forms */
 form {
     overflow:auto;
