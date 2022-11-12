@@ -6,10 +6,13 @@ from django.views.generic import ListView
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
+from django.contrib.auth.models import User
 
 
 def post_list(request):
     post_list = Post.published.all()
+    userid = request.user.id
+    print("userid in post_list: ", userid)
     # Pagination with 3 posts per page
     paginator = Paginator(post_list, 3)
     page_number = request.GET.get('page', 1)
@@ -23,7 +26,7 @@ def post_list(request):
         posts = paginator.page(paginator.num_pages)
     return render(request,
                  'blog/post/list.html',
-                 {'posts': posts})
+                 {'posts': posts,'userid':userid})
 
 
 def post_detail(request, year, month, day, post):
