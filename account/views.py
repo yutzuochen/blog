@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import LoginForm
 # from .models import Profile
 from django.contrib.auth.decorators import login_required
+import random
+from .models import VirtualAccount
 # from django import template
 # from ..blog.models import Post
 
@@ -46,10 +48,15 @@ def dashboard(request):
 @login_required
 def add_value(request):
     bank_value = request.user.point
-    bank_account = "4005216588"
+    virtual_account = VirtualAccount()
+    # bad method
+    
+    virtual_account.number = random.randint(1000000000,9999999999)
+    virtual_account.user_id = request.user.id
+    virtual_account.save()
     return render(request,
                   'account/add_value.html',
-                  {'bank_account':bank_account,'bank_value':bank_value})
+                  {'virtual_account':virtual_account.number,'bank_value':bank_value})
 
 # @register.simple_tag
 # def total_posts():

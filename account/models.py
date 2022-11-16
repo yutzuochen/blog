@@ -17,3 +17,14 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+class VirtualAccount(models.Model):
+    number = models.FloatField(default=0)
+    user_id = models.FloatField(default=0)
+
+    
+
+
+    def __str__(self):
+        return self.number
+
