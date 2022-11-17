@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Comment
+from blog.models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage,\
                                   PageNotAnInteger
 from django.views.generic import ListView
@@ -7,7 +7,7 @@ from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
 # from django.contrib.auth.models import User
-from .models import CustomUser
+from blog.models import CustomUser
 
 
 def post_list(request):
@@ -25,6 +25,7 @@ def post_list(request):
     except EmptyPage:
         # If page_number is out of range deliver last page of results
         posts = paginator.page(paginator.num_pages)
+    print("post_list in blog_try")
     return render(request,
                  'blog/post/list.html',
                  {'posts': posts,'userid':userid})
@@ -43,7 +44,7 @@ def post_detail(request, year, month, day, post):
     form = CommentForm()
 
     return render(request,
-                  'blog/post/detail.html',
+                  'blog_try/post/detail.html',
                   {'post': post,
                    'comments': comments,
                    'form': form})
@@ -56,7 +57,7 @@ class PostListView(ListView):
     queryset = Post.published.all()
     context_object_name = 'posts'
     paginate_by = 3
-    template_name = 'blog/post/list.html'
+    template_name = 'blog_try/post/list.html'
 
 
 def post_share(request, post_id):
@@ -82,7 +83,7 @@ def post_share(request, post_id):
 
     else:
         form = EmailPostForm()
-    return render(request, 'blog/post/share.html', {'post': post,
+    return render(request, 'blog_try/post/share.html', {'post': post,
                                                     'form': form,
                                                     'sent': sent})
 
@@ -101,7 +102,7 @@ def post_comment(request, post_id):
         comment.post = post
         # Save the comment to the database
         comment.save()
-    return render(request, 'blog/post/comment.html',
+    return render(request, 'blog_try/post/comment.html',
                            {'post': post,
                             'form': form,
                             'comment': comment})
