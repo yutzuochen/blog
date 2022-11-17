@@ -26,7 +26,7 @@ def post_list(request):
         # If page_number is out of range deliver last page of results
         posts = paginator.page(paginator.num_pages)
     return render(request,
-                 'blog/post/list.html',
+                 'blog/list.html',
                  {'posts': posts,'userid':userid})
 
 
